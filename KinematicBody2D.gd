@@ -27,13 +27,12 @@ func _physics_process(delta):
 	velocity.y += gravity
 	print(c_down)
 	var friction = false
-	if Input.is_action_just_pressed("click") and c_down <=2:
+	if Input.is_action_just_pressed("click") and $"../Sprite/TextureProgress".value > 25:
 		target = get_global_mouse_position()
 		velocity = position.direction_to(target) * 550
 		c_down = c_down + 1
 		$"../Sprite/TextureProgress".value = $"../Sprite/TextureProgress".value - 25
-		if c_down >= 2:
-			$Timer.start()
+		$Timer.start()
 			
 	if Input.is_action_pressed("left"):
 		velocity.x = max(velocity.x-acc, -max_speed)
@@ -74,8 +73,9 @@ func _physics_process(delta):
 
 
 func _on_Timer_timeout():
-	c_down = 0	
-	tween.interpolate_property($"../Sprite/TextureProgress", "value",
-		0, 100, 1,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	tween.start()
+	if $"../Sprite/TextureProgress".value <= 25:
+		
+		tween.interpolate_property($"../Sprite/TextureProgress", "value",
+			0, 100, 1,
+			Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		tween.start()

@@ -337,7 +337,6 @@ frame = 4
 playing = true
 
 [node name="Timer" type="Timer" parent="KinematicBody2D"]
-wait_time = 3.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 310.193, 528.035 )
